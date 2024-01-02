@@ -1,0 +1,13 @@
+.btn {
+    font-size: small;
+    line-height: 100%;
+}
+.form-select, .input-group-text, .form-control, .form-check-input {
+    font-size: small;
+    line-height: 100%;
+}
+.form-check-label {
+    font-size: small;
+    line-height: 140%;
+}
+  
