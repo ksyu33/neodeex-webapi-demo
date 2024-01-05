@@ -104,7 +104,7 @@
         this.dataResponse = null;
         this.errorInfo = null;
         let request = this.dataRequest;
-        let url = "https://simpleisbest-hello-func.azurewebsites.net/api/dataservice";
+        let url = "https://neodeex-webapi-demo-func.azurewebsites.net/api/dataservice";
         
         let client = new FoxDataServiceClient(url);
         try {

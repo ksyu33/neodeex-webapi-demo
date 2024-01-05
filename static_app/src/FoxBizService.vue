@@ -62,7 +62,7 @@ export default {
     async onExecuteClick() {
       this.bizResponse = null;
       let request = this.bizRequest;
-      let url = "https://simpleisbest-hello-func.azurewebsites.net/api/bizservice";
+      let url = "https://neodeex-webapi-demo-func.azurewebsites.net/api/bizservice";
       
       let client = new FoxBizServiceClient(url);
       try {
