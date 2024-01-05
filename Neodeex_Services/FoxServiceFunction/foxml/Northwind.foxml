@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<queryMap xmlns="http://schema.neodeex.net/fx/foxml/2023/04/">
+  <!--
+    Northwind 데이터베이스를 위한 Foxml 파일.
+  -->
+  <statements>
+    <statement id="GetProducts">
+      <text>
+        SELECT * FROM products
+        WHERE NULL IS NULL
+          $$CategoryCondition()$$
+        ORDER BY product_id ASC
+      </text>
+      <parameters>
+        <parameter name="category_id" dbType="Decimal" size="9"/>
+      </parameters>
+      <!--
+        매크로 예제. C# 코드를 사용하여 매크로를 작성하고 이를 통해 동적 쿼리가 가능하다.
+      -->
+      <macros>
+        <macro name="CategoryCondition">
+    <![CDATA[
+if (env.Args.ContainsKey("category_id")) {
+  try
+  {
+    // 문자열이나 숫자(int, long 등)에 대해 모두 작동하도록 문자열 변환 후 다시 정수형으로 변경한다.
+    // Javascript 클라이언트의 개발 편의성을 고려하면 이러한 오버헤드를 감수해야 함.
+    string idString = env.Args.category_id.ToString();
+    var id = Convert.ToInt32(env.Args.category_id);
+    if (id > 0)
+    {
+      // 인자(argument)가 주어지면 매개변수(parameter)를 추가 하거나,
+      // 인자가 없는 경우 매개변수를 제거하는 방식을 사용할 수 있다.
+      //env.Params.Add("category_id", "Decimal", 9);
+      return "AND (category_id = #category_id#)";
+    }
+  } catch { }
+}
+env.Params.Remove("category_id");
+]]>
+        </macro>
+      </macros>
+    </statement>
+    <statement id="ProductsCount">
+      <text>
+        SELECT Count(*) FROM Products
+      </text>
+    </statement>
+    <statement id="GetCategories">
+      <text>
+        SELECT * FROM Categories
+      </text>
+    </statement>
+    <statement id="GetEmployees">
+      <text>
+        SELECT * FROM Employees
+      </text>
+    </statement>
+  </statements>  
+</queryMap>

@@ -1,0 +1,432 @@
+#
+#
+# Fox Biz/Data Service 를 제공하는 Azure Function을 테스트하기 위한 Http 파일
+#
+#
+
+#@host=neodeex-webapi-demo-func.azurewebsites.net
+@host=localhost:7162
+
+###############################################################
+# BizService Northwind
+
+### Northwind.GetProducts 매개변수가 없는 경우(nul 혹은 "")
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "Northwind",
+  "methodId": "GetProducts",
+  "parameters": {
+    "name": null
+  }
+}
+
+### Northwind.GetProducts 매개변수가 제공되는 경우
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "Northwind",
+  "methodId": "GetProducts",
+  "parameters": {
+    "name": "Chef"
+  }
+}
+
+###############################################################
+# DataService Northwind.foxml
+
+### Northwind:GetProducts
+POST http://{{host}}/api/dataservice/executeDataSet
+Content-Type: application/json
+
+{
+  "queryId": "northwind:getProducts",
+  "parameters": {
+    "category_id": 3
+  }
+}
+
+### Northwind:GetCategories
+POST http://{{host}}/api/dataservice/executeDataSet
+Content-Type: application/json
+
+{
+  "queryId": "northwind:getCategories"
+}
+
+### Northwind:GetEmployees
+POST http://{{host}}/api/dataservice/executeDataSet
+Content-Type: application/json
+
+{
+  "queryId": "northwind:getEmployees"
+}
+
+### Northwind:ProductsCount
+POST http://{{host}}/api/dataservice/executeScalar
+Content-Type: application/json
+
+{
+  "queryId": "Northwind:ProductsCount"
+}
+
+###############################################################
+# DataService Test.foxml
+
+### Test.GetAllData
+POST http://{{host}}/api/dataservice/executeDataSet
+Content-Type: application/json
+
+{
+  "queryId": "test:getAllData"
+}
+
+### Test.GetData
+POST http://{{host}}/api/dataservice/executeDataSet
+Content-Type: application/json
+
+{
+  "queryId": "test:getData",
+  "parameters": {
+    "id" : 11
+  }
+}
+
+### Test.InsertData
+POST http://{{host}}/api/dataservice/executeNonQuery
+Content-Type: application/json
+
+{
+  "queryId": "test:insertData",
+  "parameters": {
+    "id" : 11
+  }
+}
+
+### Test.InsertData & Test.GetAllData
+POST http://{{host}}/api/dataservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:insertData",
+      "parameters": {
+        "id" : 11
+      }
+    },
+    {
+      "operation": "executeDataSet",
+      "queryId": "test:getAllData"
+    }
+  ]
+}
+
+### Test.InsertData x 3 & Test.GetAllData
+POST http://{{host}}/api/dataservice/executeMultiple
+Content-Type: application/json
+
+{
+  "databaseName": "",
+  "transaction": "Local",
+  "diagnostics": "ServiceLog",
+  "items": [
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:insertData",
+      "parameters": {
+        "id" : 13
+      }
+    },
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:insertData",
+      "parameters": {
+        "id" : 14
+      }
+    },
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:insertData",
+      "parameters": {
+        "id" : 13
+      }
+    },
+    {
+      "operation": "executeDataSet",
+      "queryId": "test:getAllData"
+    }
+  ]
+}
+
+### Test.UpdateData
+POST http://{{host}}/api/dataservice/executeNonQuery
+Content-Type: application/json
+
+{
+  "queryId": "test:updateData",
+  "parameters": {
+    "id" : 11,
+    "col1": -11,
+    "col2": "updated"
+  }
+}
+
+### Test.UpdateData & Test.GetAllData
+POST http://{{host}}/api/dataservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:updateData",
+      "parameters": {
+        "id" : 11,
+        "col1": -11,
+        "col2": "updated"
+      }
+    },
+    {
+      "operation": "executeDataSet",
+      "queryId": "test:getAllData"
+    }
+  ]
+}
+
+### Test.DeleteData
+POST http://{{host}}/api/dataservice/executeNonQuery
+Content-Type: application/json
+
+{
+  "queryId": "test:deleteData",
+  "parameters": {
+    "id" : 11
+  }
+}
+
+### Test.DeleteData & Test.GetAllData
+POST http://{{host}}/api/dataservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:deleteData",
+      "parameters": {
+        "id" : 11
+      }
+    },
+    {
+      "operation": "executeDataSet",
+      "queryId": "test:getAllData"
+    }
+  ]
+}
+
+### Test.DeleteAllData
+POST http://{{host}}/api/dataservice/executeDataSet
+Content-Type: application/json
+
+{
+  "queryId": "test:deleteAllData"
+}
+
+### Test.DeleteAllData & Test.GetAllData
+POST http://{{host}}/api/dataservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "operation": "executeNonQuery",
+      "queryId": "test:deleteAllData"
+    },
+    {
+      "operation": "executeDataSet",
+      "queryId": "test:getAllData"
+    }
+  ]
+}
+
+###############################################################
+# BizLogic.TestBiz
+
+### TestBiz.InsertData
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestBiz",
+  "methodId": "InsertData",
+  "parameters": {
+    "ids": [11, 12, 13]
+  }
+}
+
+### TestBiz.InsertData & TestDac.GetAllData
+POST http://{{host}}/api/bizservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "classId": "BizLogicLib.TestBiz",
+      "methodId": "InsertData",
+      "parameters": {
+        "ids": [14, 15, 14]
+      }
+    },
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "GetAllData"
+    }
+  ]
+}
+
+###############################################################
+# BizLogic.TestDac 
+
+### TestDac.GetAllData
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestDac",
+  "methodId": "GetAllData",
+  "diagnostics": "ServiceLog"
+}
+
+### TestDac.GetData
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestDac",
+  "methodId": "GetData",
+  "parameters": {
+    "id" : 11
+  }
+}
+
+### TestDac.InsertData
+# 주) 2024-01-05 현재 optional parameter가 아직 지원되지 않는다.
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestDac",
+  "methodId": "InsertData",
+  "parameters": {
+    "id": 11,
+    "col1": 11,
+    "col2": "new data"
+  }
+}
+
+### TestDac.InsertData & GetAllData
+POST http://{{host}}/api/bizservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "InsertData",
+      "parameters": {
+        "id" : 11,
+        "col1": 11,
+        "col2": "new data"
+      }
+    },
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "GetAllData"
+    }
+  ]
+}
+
+### TestDac.UpdateData
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestDac",
+  "methodId": "UpdateData",
+  "parameters": {
+    "id": 11,
+    "col1": -11,
+    "col2": "updated"
+  }
+}
+
+### TestDac.UpdateData & GetData
+POST http://{{host}}/api/bizservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "UpdateData",
+      "parameters": {
+        "id": 11,
+        "col1": -11,
+        "col2": "updated"
+      }
+    },
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "GetData",
+      "parameters": {
+        "id" : 11
+      }
+    }
+  ]
+}
+
+### TestDac.DeleteData
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestDac",
+  "methodId": "DeleteData",
+  "parameters": {
+    "id": 11
+  }
+}
+
+### TestDac.DeleteData & GetAllData
+POST http://{{host}}/api/bizservice/executeMultiple
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "DeleteData",
+      "parameters": {
+        "id": 11
+      }
+    },
+    {
+      "classId": "BizLogicLib.TestDac",
+      "methodId": "GetAllData"
+    }
+  ]
+}
+
+### TestDac.DeleteAllData
+POST http://{{host}}/api/bizservice/execute
+Content-Type: application/json
+
+{
+  "classId": "BizLogicLib.TestDac",
+  "methodId": "DeleteAllData"
+}
+

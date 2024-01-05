@@ -1,0 +1,24 @@
+{
+  "$schema": "https://neodeex.github.io/doc/neodeex.config.schema.json",
+  "database": {
+    "connectionStrings": {
+      "default": {
+        "type": "NeoDEEX.Data.NpgsqlClient.FoxNpgsqlDbAccess",
+        "connectionString": "server=neodeex-webapi-demo-db.postgres.database.azure.com:5432;database=northwind;user id=Tester;password=P@ssw0rd00;"
+      }
+    }
+  },
+  "dataService": {
+    "diagnostics": {
+      "enable": true
+    }
+  },
+  "bizService": {
+    "diagnostics": {
+      "enable": true
+    },
+    "modules": [
+      "BizLogicLib"
+    ]
+  }
+}
