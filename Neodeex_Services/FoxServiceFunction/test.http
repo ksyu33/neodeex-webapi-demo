@@ -3,15 +3,18 @@
 # Fox Biz/Data Service 를 제공하는 Azure Function을 테스트하기 위한 Http 파일
 #
 #
+@host=https://neodeex-webapi-demo-func.azurewebsites.net
+#@host=http://localhost:7162
 
-#@host=neodeex-webapi-demo-func.azurewebsites.net
-@host=localhost:7162
+###############################################################
+# Echo
+GET {{host}}/api/echo?name=ksyu33
 
 ###############################################################
 # BizService Northwind
 
 ### Northwind.GetProducts 매개변수가 없는 경우(nul 혹은 "")
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -23,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Northwind.GetProducts 매개변수가 제공되는 경우
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -38,7 +41,7 @@ Content-Type: application/json
 # DataService Northwind.foxml
 
 ### Northwind:GetProducts
-POST http://{{host}}/api/dataservice/executeDataSet
+POST {{host}}/api/dataservice/executeDataSet
 Content-Type: application/json
 
 {
@@ -49,7 +52,7 @@ Content-Type: application/json
 }
 
 ### Northwind:GetCategories
-POST http://{{host}}/api/dataservice/executeDataSet
+POST {{host}}/api/dataservice/executeDataSet
 Content-Type: application/json
 
 {
@@ -57,7 +60,7 @@ Content-Type: application/json
 }
 
 ### Northwind:GetEmployees
-POST http://{{host}}/api/dataservice/executeDataSet
+POST {{host}}/api/dataservice/executeDataSet
 Content-Type: application/json
 
 {
@@ -65,7 +68,7 @@ Content-Type: application/json
 }
 
 ### Northwind:ProductsCount
-POST http://{{host}}/api/dataservice/executeScalar
+POST {{host}}/api/dataservice/executeScalar
 Content-Type: application/json
 
 {
@@ -76,7 +79,7 @@ Content-Type: application/json
 # DataService Test.foxml
 
 ### Test.GetAllData
-POST http://{{host}}/api/dataservice/executeDataSet
+POST {{host}}/api/dataservice/executeDataSet
 Content-Type: application/json
 
 {
@@ -84,7 +87,7 @@ Content-Type: application/json
 }
 
 ### Test.GetData
-POST http://{{host}}/api/dataservice/executeDataSet
+POST {{host}}/api/dataservice/executeDataSet
 Content-Type: application/json
 
 {
@@ -95,7 +98,7 @@ Content-Type: application/json
 }
 
 ### Test.InsertData
-POST http://{{host}}/api/dataservice/executeNonQuery
+POST {{host}}/api/dataservice/executeNonQuery
 Content-Type: application/json
 
 {
@@ -106,7 +109,7 @@ Content-Type: application/json
 }
 
 ### Test.InsertData & Test.GetAllData
-POST http://{{host}}/api/dataservice/executeMultiple
+POST {{host}}/api/dataservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -126,7 +129,7 @@ Content-Type: application/json
 }
 
 ### Test.InsertData x 3 & Test.GetAllData
-POST http://{{host}}/api/dataservice/executeMultiple
+POST {{host}}/api/dataservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -163,7 +166,7 @@ Content-Type: application/json
 }
 
 ### Test.UpdateData
-POST http://{{host}}/api/dataservice/executeNonQuery
+POST {{host}}/api/dataservice/executeNonQuery
 Content-Type: application/json
 
 {
@@ -176,7 +179,7 @@ Content-Type: application/json
 }
 
 ### Test.UpdateData & Test.GetAllData
-POST http://{{host}}/api/dataservice/executeMultiple
+POST {{host}}/api/dataservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -198,7 +201,7 @@ Content-Type: application/json
 }
 
 ### Test.DeleteData
-POST http://{{host}}/api/dataservice/executeNonQuery
+POST {{host}}/api/dataservice/executeNonQuery
 Content-Type: application/json
 
 {
@@ -209,7 +212,7 @@ Content-Type: application/json
 }
 
 ### Test.DeleteData & Test.GetAllData
-POST http://{{host}}/api/dataservice/executeMultiple
+POST {{host}}/api/dataservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -229,7 +232,7 @@ Content-Type: application/json
 }
 
 ### Test.DeleteAllData
-POST http://{{host}}/api/dataservice/executeDataSet
+POST {{host}}/api/dataservice/executeDataSet
 Content-Type: application/json
 
 {
@@ -237,7 +240,7 @@ Content-Type: application/json
 }
 
 ### Test.DeleteAllData & Test.GetAllData
-POST http://{{host}}/api/dataservice/executeMultiple
+POST {{host}}/api/dataservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -257,7 +260,7 @@ Content-Type: application/json
 # BizLogic.TestBiz
 
 ### TestBiz.InsertData
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -269,7 +272,7 @@ Content-Type: application/json
 }
 
 ### TestBiz.InsertData & TestDac.GetAllData
-POST http://{{host}}/api/bizservice/executeMultiple
+POST {{host}}/api/bizservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -292,7 +295,7 @@ Content-Type: application/json
 # BizLogic.TestDac 
 
 ### TestDac.GetAllData
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -302,7 +305,7 @@ Content-Type: application/json
 }
 
 ### TestDac.GetData
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -315,7 +318,7 @@ Content-Type: application/json
 
 ### TestDac.InsertData
 # 주) 2024-01-05 현재 optional parameter가 아직 지원되지 않는다.
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -329,7 +332,7 @@ Content-Type: application/json
 }
 
 ### TestDac.InsertData & GetAllData
-POST http://{{host}}/api/bizservice/executeMultiple
+POST {{host}}/api/bizservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -351,7 +354,7 @@ Content-Type: application/json
 }
 
 ### TestDac.UpdateData
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -365,7 +368,7 @@ Content-Type: application/json
 }
 
 ### TestDac.UpdateData & GetData
-POST http://{{host}}/api/bizservice/executeMultiple
+POST {{host}}/api/bizservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -390,7 +393,7 @@ Content-Type: application/json
 }
 
 ### TestDac.DeleteData
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
@@ -402,7 +405,7 @@ Content-Type: application/json
 }
 
 ### TestDac.DeleteData & GetAllData
-POST http://{{host}}/api/bizservice/executeMultiple
+POST {{host}}/api/bizservice/executeMultiple
 Content-Type: application/json
 
 {
@@ -422,7 +425,7 @@ Content-Type: application/json
 }
 
 ### TestDac.DeleteAllData
-POST http://{{host}}/api/bizservice/execute
+POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
 {
