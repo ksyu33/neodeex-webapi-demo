@@ -4,7 +4,8 @@
     "connectionStrings": {
       "default": {
         "type": "NeoDEEX.Data.NpgsqlClient.FoxNpgsqlDbAccess",
-        "connectionString": "server=neodeex-webapi-demo-db.postgres.database.azure.com:5432;database=northwind;user id=Tester;password=P@ssw0rd00;",
+        "connectionString": "Fb+vazKLc9D9WnNS+e6vCbBRqHBb5Oc1YRLomTR2uvQLF5bz11f3tGBh56FVijngyuZKSlQeOEHjg04x4zCnTWg9NhUS/U4JXSZh0+7baJpyPJq4wkm6E6D8JNVDmFPLidGOUVuA4mLrkt2jXcOzoA==",
+        "encrypted": true,
         "queryMapper": "SqlMapper"
       }
     },

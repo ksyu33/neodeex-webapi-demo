@@ -1,19 +1,15 @@
 #
 #
-# Fox Biz/Data Service ¸¦ Á¦°øÇÏ´Â Azure FunctionÀ» Å×½ºÆ®ÇÏ±â À§ÇÑ Http ÆÄÀÏ
+# Fox Biz/Data Service ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Azure Functionï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Http ï¿½ï¿½ï¿½ï¿½
 #
 #
 @host=https://neodeex-webapi-demo-func.azurewebsites.net
 #@host=http://localhost:7162
 
 ###############################################################
-# Echo
-GET {{host}}/api/echo?name=ksyu33
-
-###############################################################
 # BizService Northwind
 
-### Northwind.GetProducts ¸Å°³º¯¼ö°¡ ¾ø´Â °æ¿ì(nul È¤Àº "")
+### Northwind.GetProducts ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(nul È¤ï¿½ï¿½ "")
 POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
@@ -25,7 +21,7 @@ Content-Type: application/json
   }
 }
 
-### Northwind.GetProducts ¸Å°³º¯¼ö°¡ Á¦°øµÇ´Â °æ¿ì
+### Northwind.GetProducts ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½
 POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
@@ -317,7 +313,7 @@ Content-Type: application/json
 }
 
 ### TestDac.InsertData
-# ÁÖ) 2024-01-05 ÇöÀç optional parameter°¡ ¾ÆÁ÷ Áö¿øµÇÁö ¾Ê´Â´Ù.
+# ï¿½ï¿½) 2024-01-05 ï¿½ï¿½ï¿½ï¿½ optional parameterï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 POST {{host}}/api/bizservice/execute
 Content-Type: application/json
 
